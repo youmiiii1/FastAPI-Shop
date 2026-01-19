@@ -1,3 +1,5 @@
 .venv
 .env
 ecommerce.db
+.idea
+alembic.ini
