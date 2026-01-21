@@ -3,3 +3,4 @@
 ecommerce.db
 .idea
 alembic.ini
+__pycache__
