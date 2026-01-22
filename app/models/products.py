@@ -1,5 +1,5 @@
 from decimal import Decimal
-from sqlalchemy import String, Boolean, Integer, Numeric, ForeignKey, func, DateTime
+from sqlalchemy import String, Boolean, Integer, Numeric, ForeignKey, func, DateTime, Computed, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database import Base
 from datetime import datetime
@@ -9,6 +9,8 @@ if TYPE_CHECKING:
     from .categories import Category
     from .users import User
     from .reviews import Review
+    from .cart_items import CartItem
+    from .orders import OrderItem
 
 class Product(Base):
     __tablename__ = "products"
@@ -30,3 +32,5 @@ class Product(Base):
     seller: Mapped["User"] = relationship("User", back_populates="products")
 
     reviews: Mapped[list["Review"]] = relationship("Review", back_populates="product")
+    cart_items: Mapped[list["CartItem"]] = relationship("CartItem", back_populates="product", cascade="all, delete-orphan")
+    order_items: Mapped[list["OrderItem"]] = relationship("OrderItem", back_populates="product")
