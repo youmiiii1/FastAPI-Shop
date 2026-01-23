@@ -4,3 +4,4 @@ ecommerce.db
 .idea
 alembic.ini
 __pycache__
+dump.rdb

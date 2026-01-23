@@ -1,10 +1,19 @@
 from fastapi import FastAPI
+from celery import Celery
 from app.routers import categories, products, users, reviews, cart, orders
 
 # Создаём приложение FastAPI
 app = FastAPI(
     title="FastAPI Интернет-магазин",
     version="0.1.0",
+)
+
+celery = Celery(
+    __name__,
+    broker='redis://127.0.0.1:6379/0',
+    backend='redis://127.0.0.1:6379/0',
+    broker_connection_retry_on_startup=True,
+    include=['app.celery_task']
 )
 
 # app_v1 = FastAPI(
